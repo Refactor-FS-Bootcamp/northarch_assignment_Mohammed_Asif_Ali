@@ -8,7 +8,6 @@ import SearchPage from "./Search";
 function App() {
   const { state, dispatch, tableData } = useContext(MyContext);
   const [post, setPost] = useState(false);
-  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     dispatch({ type: "enable_reset" });
@@ -37,23 +36,6 @@ function App() {
     }
   }, [post]);
 
-  console.log(state.data);
-  const handleFilter = (e) => {
-    console.log(e.target.value);
-    if (e.target.value === "" || !e.target.value) {
-      dispatch({ type: "fetch_data", payload: tableData });
-    } else {
-      let filter = state.data.filter(
-        (item) =>
-          item.FirstName.toLowerCase().includes(e.target.value.toLowerCase()) ||
-          item.LastName.toLowerCase().includes(e.target.value.toLowerCase()) ||
-          item.Email.toLowerCase().includes(e.target.value.toLowerCase())
-      );
-
-      dispatch({ type: "fetch_data", payload: filter });
-    }
-  };
-
   return (
     <div
       style={{
@@ -74,7 +56,7 @@ function App() {
         <h1 style={{ color: grey(800) }}>
           NAC Assignment Frontend(React JS Table)
         </h1>
-        <SearchPage handleChange={handleFilter} />
+        {/* <SearchPage handleChange={handleFilter} /> */}
       </div>
       <div style={{ overflow: "auto", display: "flex" }}>
         <div
